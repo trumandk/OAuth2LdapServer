@@ -1,0 +1,25 @@
+version: '3.3'
+services:
+  client:
+    build: ./client
+    network_mode: host
+    environment:
+      LDAP_BASE: dc=glauth,dc=com
+      LDAP_HOST: ldap
+      LDAP_PORT: 389
+      LDAP_BIND_DN: cn=serviceuser,ou=svcaccts,dc=glauth,dc=com
+      LDAP_BIND_PASSWORD: mysecret
+  server:
+    build: ./server
+    network_mode: host
+    #    ports:
+    #      - 9096:9096
+    environment:
+      LDAP_BASE: dc=glauth,dc=com
+      LDAP_HOST: ldap
+      LDAP_PORT: 389
+      LDAP_BIND_DN: cn=serviceuser,ou=svcaccts,dc=glauth,dc=com
+      LDAP_BIND_PASSWORD: mysecret
+      #  ldap:
+      #    image: trumandk/ldap
+      #    container_name: ldap
